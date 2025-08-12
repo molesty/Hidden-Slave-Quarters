@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Captura o input de movimento
+        
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
 
@@ -15,5 +15,41 @@ public class PlayerMovement : MonoBehaviour
 
         // Move o personagem (2D)
         transform.Translate(movement * speed * Time.deltaTime);
+    }
+    
+
+    public float jumpForce = 5f; // For�a do pulo
+    private Rigidbody2D rb;
+    private bool isGrounded;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Loop ()
+    {
+        // Verifica se apertou espa�o e est� no ch�o
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Considera que est� no ch�o se colidir com objetos marcados como "Ground"
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
