@@ -2,7 +2,7 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f; // Velocidade de movimento
+    public float speed = 5f; 
 
     void Update()
     {
@@ -10,15 +10,15 @@ public class PlayerMovement : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
 
-        // Cria um vetor de movimento
+
         Vector2 movement = new Vector2(moveX, moveY);
 
-        // Move o personagem (2D)
+        
         transform.Translate(movement * speed * Time.deltaTime);
     }
     
 
-    public float jumpForce = 5f; // For�a do pulo
+    public float jumpForce = 5f; 
     private Rigidbody2D rb;
     private bool isGrounded;
 
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Loop ()
     {
-        // Verifica se apertou espa�o e est� no ch�o
+        
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Considera que est� no ch�o se colidir com objetos marcados como "Ground"
+       
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
