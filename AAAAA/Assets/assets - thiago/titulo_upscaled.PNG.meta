@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      titulo_upscaled_0: 2920101145862905482
+      titulo_upscaled_1: -468637761822834212
+      titulo_upscaled_2: 2937314171283945480
+      titulo_upscaled_3: -2632542648554620134
+      titulo_upscaled_4: 2332998579544754388
+      titulo_upscaled_5: -6468213074419839769
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
