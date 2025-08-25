@@ -4,6 +4,12 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 5f;
     public Vector3 direction;
+    public float lifeTime = 5f;
+
+    void Start()
+    {
+        Destroy(gameObject, lifeTime);
+    }
 
     void Update()
     {
@@ -14,11 +20,9 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player atingido!");
-            Destroy(gameObject);
-        }
-        else if (other.CompareTag("Obstacle")) 
-        {
+            
+            //other.GetComponent<PlayerHealth>().TakeDamage(1);
+
             Destroy(gameObject);
         }
     }
