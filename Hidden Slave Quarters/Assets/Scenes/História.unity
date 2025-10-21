@@ -368,9 +368,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1990203507}
+      - m_Target: {fileID: 1281272299}
         m_TargetAssemblyTypeName: DialogueController, Assembly-CSharp
-        m_MethodName: StartDialogue
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -430,7 +430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8d039ed96fd344d811a0a9e8ca2cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botao: {fileID: 459796958}
 --- !u!1 &552191323
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1281272301}
+  - component: {fileID: 1281272302}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -736,6 +736,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1281272302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281272299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392734b24e2a7e24087309729728c114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueController
+  box: {fileID: 2094594349}
+  speakerText: {fileID: 717389232}
+  bodyText: {fileID: 1302463535}
+  portraitImage: {fileID: 0}
+  continueIcon: {fileID: 0}
+  lines:
+  - speaker: 
+    text: 
+    portrait: {fileID: 0}
+  charsPerSecond: 40
+  punctuationPause: 0.25
+  advanceKey: 323
 --- !u!1 &1302463534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,6 +1116,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1113,6 +1139,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -1156,46 +1183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96419493f99e2dd40817cd401b2bab73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  box: {fileID: 2094594349}
-  speakerText: {fileID: 717389232}
-  bodyText: {fileID: 1302463535}
-  portraitImage: {fileID: 0}
-  continueIcon: {fileID: 0}
-  botao: {fileID: 0}
-  scriptAlvo: {fileID: 0}
-  lines:
-  - speaker: 
-    text: "A chuva cai pesada sobre a floresta amaz\xF4nica. As gotas atingem as
-      folhas largas como se o pr\xF3prio c\xE9u lamentasse o que est\xE1 escondido
-      sob a mata. Abdias segura um caderno encharcado \u2014 p\xE1ginas antigas com
-      relatos de um homem que fugiu de algo que n\xE3o deveria mais existir."
-    portrait: {fileID: 0}
-  - speaker: 
-    text: "O som distante de um tambor ecoa. Fraco, quase impercept\xEDvel\u2026
-      mas ritmado. Como um pedido de socorro."
-    portrait: {fileID: 0}
-  - speaker: 
-    text: "\u201CEles ainda est\xE3o l\xE1\u201D, escreve Abdias em seu di\xE1rio,
-      antes de fechar o caderno com as m\xE3os tr\xEAmulas."
-    portrait: {fileID: 0}
-  - speaker: 
-    text: "A cada passo, o ch\xE3o \xFAmido revela sinais de que algu\xE9m passou
-      por ali recentemente \u2014 correntes quebradas, marcas de fogo e roupas rasgadas.
-      O ar \xE9 denso, pesado, e a floresta parece observ\xE1-lo."
-    portrait: {fileID: 0}
-  - speaker: 
-    text: "Quando a n\xE9voa se abre, ele v\xEA: um casar\xE3o antigo, de muros altos
-      e janelas trancadas com madeira apodrecida. \xC0 primeira vista, parece abandonado\u2026
-      mas h\xE1 fuma\xE7a saindo da chamin\xE9. E gritos abafados."
-    portrait: {fileID: 0}
-  - speaker: 
-    text: "Abdias sente o cora\xE7\xE3o acelerar. A senzala escondida \u2014 aquela
-      que muitos diziam ser apenas lenda \u2014 est\xE1 viva. E nela, um mal antigo
-      ainda respira."
-    portrait: {fileID: 0}
-  charsPerSecond: 30
-  punctuationPause: 0.25
-  advanceKey: 323
 --- !u!4 &1990203508
 Transform:
   m_ObjectHideFlags: 0
