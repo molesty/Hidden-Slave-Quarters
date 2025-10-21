@@ -296,7 +296,6 @@ GameObject:
   - component: {fileID: 459796960}
   - component: {fileID: 459796959}
   - component: {fileID: 459796958}
-  - component: {fileID: 459796961}
   m_Layer: 5
   m_Name: "Bot\xE3o"
   m_TagString: Untagged
@@ -418,18 +417,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459796956}
   m_CullTransparentMesh: 1
---- !u!114 &459796961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459796956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b8d039ed96fd344d811a0a9e8ca2cdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &552191323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,7 +1150,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1990203508}
-  - component: {fileID: 1990203507}
   m_Layer: 0
   m_Name: DialogueController
   m_TagString: Untagged
@@ -1171,18 +1157,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1990203507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990203506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96419493f99e2dd40817cd401b2bab73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1990203508
 Transform:
   m_ObjectHideFlags: 0
