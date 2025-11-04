@@ -9,6 +9,7 @@ TagManager:
   - HideSpot
   - Key
   - Door
+  - Enemy
   layers:
   - Default
   - TransparentFX
