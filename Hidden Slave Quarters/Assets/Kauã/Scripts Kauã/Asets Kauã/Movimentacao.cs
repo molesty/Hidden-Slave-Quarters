@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Movimentação : MonoBehaviour
+public class Movimentacao : MonoBehaviour
 {
     [Header("Movimento")]
     public float speed = 5f;
     public float jumpForce = 10f;
 
-    [Header("Verificação de chão")]
+    [Header("VerificaÃ§Ã£o de chÃ£o")]
     public Transform groundCheck;
     public float groundRadius = 0.2f;
     public LayerMask groundLayer;
