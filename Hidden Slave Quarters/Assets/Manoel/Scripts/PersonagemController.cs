@@ -33,34 +33,6 @@ public class PersonagemController : MonoBehaviour
         AtualizarAnimacao();
         VerificarDetecao();
     }
-    void HandleInteraction()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("Tecla E pressionada - Verificando interação...");
-            TentarInteragir();
-        }
-    }
-
-    void TentarInteragir()
-    {
-        Debug.Log("Tentando interagir...");
-        Collider2D[] interactables = Physics2D.OverlapCircleAll(transform.position, 2f);
-        Debug.Log("Encontrou " + interactables.Length + " objetos próximos");
-
-        foreach (Collider2D collider in interactables)
-        {
-            Debug.Log("Verificando objeto: " + collider.gameObject.name);
-
-            ItemColetavel item = collider.GetComponent<ItemColetavel>();
-            if (item != null)
-            {
-                Debug.Log("Item coletável encontrado: " + item.itemID);
-                item.Coletar();
-                return;
-            }
-        }
-    }
 
     void ProcessarInput()
     {
@@ -87,19 +59,25 @@ public class PersonagemController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("Tecla E pressionada - Verificando interacao...");
             TentarInteragir();
         }
     }
 
     void TentarInteragir()
     {
+        Debug.Log("Tentando interagir...");
         Collider2D[] interactables = Physics2D.OverlapCircleAll(transform.position, 2f);
+        Debug.Log("Encontrou " + interactables.Length + " objetos proximos");
 
         foreach (Collider2D collider in interactables)
         {
+            Debug.Log("Verificando objeto: " + collider.gameObject.name);
+
             ItemColetavel item = collider.GetComponent<ItemColetavel>();
             if (item != null)
             {
+                Debug.Log("Item coletavel encontrado: " + item.itemID);
                 item.Coletar();
                 return;
             }
@@ -107,6 +85,7 @@ public class PersonagemController : MonoBehaviour
             NPCController npc = collider.GetComponent<NPCController>();
             if (npc != null)
             {
+                Debug.Log("NPC encontrado: " + npc.npcID);
                 npc.Interagir();
                 return;
             }
@@ -114,6 +93,7 @@ public class PersonagemController : MonoBehaviour
             ObjetoInterativo interactable = collider.GetComponent<ObjetoInterativo>();
             if (interactable != null)
             {
+                Debug.Log("Objeto interativo encontrado: " + interactable.name);
                 interactable.Interagir();
                 return;
             }
@@ -121,6 +101,7 @@ public class PersonagemController : MonoBehaviour
             PistaAmbiente pista = collider.GetComponent<PistaAmbiente>();
             if (pista != null)
             {
+                Debug.Log("Pista ambiente encontrada");
                 pista.RevelarPista();
                 return;
             }
@@ -179,7 +160,6 @@ public class PersonagemController : MonoBehaviour
 
     void AtualizarAnimacao()
     {
-        
         if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetFloat("Velocidade", movimento.magnitude);
