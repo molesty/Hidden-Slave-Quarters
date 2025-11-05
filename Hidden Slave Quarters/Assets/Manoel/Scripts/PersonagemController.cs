@@ -3,24 +3,24 @@ using System.Collections;
 
 public class PersonagemController : MonoBehaviour
 {
-    [Header("Configuracoes de Movimento")]
-    public float velocidadeNormal = 3f;
-    public float velocidadeFurtiva = 1.5f;
-    public float distanciaDetecao = 5f;
+    [Header("Configuracoes Point'n'Click")]
+    public float velocidadeMovimento = 3f;
+    public float distanciaParada = 0.1f;
 
     [Header("Estado do Personagem")]
     public bool estaEscondido = false;
     public bool estaObservando = false;
+    public bool estaAndando = false;
     public int conhecimentoCultural = 0;
 
-    private Rigidbody2D rb;
+    private Vector3 destino;
     private Animator animator;
-    private Vector2 movimento;
+    private bool viradoDireita = true;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        destino = transform.position;
     }
 
     void Update()
@@ -28,30 +28,113 @@ public class PersonagemController : MonoBehaviour
         if (GameManager.instancia != null && GameManager.instancia.estadoAtual != GameManager.EstadoJogo.Jogando)
             return;
 
-        ProcessarInput();
+        ProcessarClick();
+        MoverParaDestino();
         HandleInteraction();
         AtualizarAnimacao();
         VerificarDetecao();
     }
 
-    void ProcessarInput()
+    void ProcessarClick()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+        if (Input.GetMouseButtonDown(0))
+        { 
+            Vector3 posicaoMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            posicaoMouse.z = 0;
 
-        movimento = new Vector2(moveX, moveY).normalized;
+            RaycastHit2D hit = Physics2D.Raycast(posicaoMouse, Vector2.zero);
+            if (hit.collider != null)
+            {
+                ItemColetavel item = hit.collider.GetComponent<ItemColetavel>();
+                if (item != null)
+                {
+                    item.Coletar();
+                    return;
+                }
 
-        float velocidadeAtual = Input.GetKey(KeyCode.LeftShift) ?
-                              velocidadeFurtiva : velocidadeNormal;
+                NPCController npc = hit.collider.GetComponent<NPCController>();
+                if (npc != null)
+                {
+                    destino = hit.transform.position;
+                    StartCoroutine(MoverEInteragir(npc));
+                    return;
+                }
 
-        if (rb != null)
-        {
-            rb.linearVelocity = movimento * velocidadeAtual;
+                ObjetoInterativo obj = hit.collider.GetComponent<ObjetoInterativo>();
+                if (obj != null)
+                {
+                    destino = hit.transform.position;
+                    StartCoroutine(MoverEInteragir(obj));
+                    return;
+                }
+
+                PistaAmbiente pista = hit.collider.GetComponent<PistaAmbiente>();
+                if (pista != null)
+                {
+                    destino = hit.transform.position;
+                    StartCoroutine(MoverEInteragir(pista));
+                    return;
+                }
+            }
+
+            destino = posicaoMouse;
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.E))
+    void MoverParaDestino()
+    {
+        float distancia = Vector3.Distance(transform.position, destino);
+
+        if (distancia > distanciaParada)
         {
-            IniciarObservacao();
+            estaAndando = true;
+            Vector3 direcao = (destino - transform.position).normalized;
+            transform.position += direcao * velocidadeMovimento * Time.deltaTime;
+
+            if (direcao.x > 0 && !viradoDireita)
+            {
+                VirarPersonagem();
+            }
+            else if (direcao.x < 0 && viradoDireita)
+            {
+                VirarPersonagem();
+            }
+        }
+        else
+        {
+            estaAndando = false;
+        }
+    }
+
+    void VirarPersonagem()
+    {
+        viradoDireita = !viradoDireita;
+        Vector3 escala = transform.localScale;
+        escala.x *= -1;
+        transform.localScale = escala;
+    }
+
+    IEnumerator MoverEInteragir(Component componente)
+    {
+        while (Vector3.Distance(transform.position, destino) > distanciaParada)
+        {
+            yield return null;
+        }
+        if (componente is ItemColetavel item)
+        {
+            item.Coletar();
+        }
+        else if (componente is NPCController npc)
+        {
+            npc.Interagir();
+        }
+        else if (componente is ObjetoInterativo obj)
+        {
+            obj.Interagir();
+        }
+        else if (componente is PistaAmbiente pista)
+        {
+            pista.RevelarPista();
         }
     }
 
@@ -59,52 +142,7 @@ public class PersonagemController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Tecla E pressionada - Verificando interacao...");
-            TentarInteragir();
-        }
-    }
-
-    void TentarInteragir()
-    {
-        Debug.Log("Tentando interagir...");
-        Collider2D[] interactables = Physics2D.OverlapCircleAll(transform.position, 2f);
-        Debug.Log("Encontrou " + interactables.Length + " objetos proximos");
-
-        foreach (Collider2D collider in interactables)
-        {
-            Debug.Log("Verificando objeto: " + collider.gameObject.name);
-
-            ItemColetavel item = collider.GetComponent<ItemColetavel>();
-            if (item != null)
-            {
-                Debug.Log("Item coletavel encontrado: " + item.itemID);
-                item.Coletar();
-                return;
-            }
-
-            NPCController npc = collider.GetComponent<NPCController>();
-            if (npc != null)
-            {
-                Debug.Log("NPC encontrado: " + npc.npcID);
-                npc.Interagir();
-                return;
-            }
-
-            ObjetoInterativo interactable = collider.GetComponent<ObjetoInterativo>();
-            if (interactable != null)
-            {
-                Debug.Log("Objeto interativo encontrado: " + interactable.name);
-                interactable.Interagir();
-                return;
-            }
-
-            PistaAmbiente pista = collider.GetComponent<PistaAmbiente>();
-            if (pista != null)
-            {
-                Debug.Log("Pista ambiente encontrada");
-                pista.RevelarPista();
-                return;
-            }
+            IniciarObservacao();
         }
     }
 
@@ -116,17 +154,14 @@ public class PersonagemController : MonoBehaviour
     IEnumerator ObservarAmbiente()
     {
         estaObservando = true;
-
         RevelarInformacoesAmbiente();
-
         yield return new WaitForSeconds(2f);
-
         estaObservando = false;
     }
 
     void RevelarInformacoesAmbiente()
     {
-        Collider2D[] objetosProximos = Physics2D.OverlapCircleAll(transform.position, 3f);
+        Collider2D[] objetosProximos = Physics2D.OverlapCircleAll(transform.position, 2f);
 
         foreach (Collider2D colisor in objetosProximos)
         {
@@ -146,14 +181,17 @@ public class PersonagemController : MonoBehaviour
 
     void VerificarDetecao()
     {
-        Collider2D[] guardasProximos = Physics2D.OverlapCircleAll(transform.position, distanciaDetecao);
-
-        foreach (Collider2D colisor in guardasProximos)
+        if (estaAndando && !estaEscondido)
         {
-            InimigoController guarda = colisor.GetComponent<InimigoController>();
-            if (guarda != null && !estaEscondido)
+            Collider2D[] guardasProximos = Physics2D.OverlapCircleAll(transform.position, 4f);
+
+            foreach (Collider2D colisor in guardasProximos)
             {
-                guarda.DetectarJogador(transform.position);
+                InimigoController guarda = colisor.GetComponent<InimigoController>();
+                if (guarda != null)
+                {
+                    guarda.DetectarJogador(transform.position);
+                }
             }
         }
     }
@@ -162,7 +200,7 @@ public class PersonagemController : MonoBehaviour
     {
         if (animator != null && animator.runtimeAnimatorController != null)
         {
-            animator.SetFloat("Velocidade", movimento.magnitude);
+            animator.SetBool("Andando", estaAndando);
             animator.SetBool("Escondido", estaEscondido);
         }
     }
@@ -174,5 +212,12 @@ public class PersonagemController : MonoBehaviour
         {
             UIManager.instancia.AtualizarUI();
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(destino, 0.3f);
+        Gizmos.DrawLine(transform.position, destino);
     }
 }

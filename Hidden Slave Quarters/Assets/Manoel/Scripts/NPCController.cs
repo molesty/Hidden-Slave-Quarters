@@ -10,7 +10,7 @@ public class NPCController : MonoBehaviour
 
     public void Interagir()
     {
-        if (SistemaEntrega.instancia.temItem)
+        if (SistemaEntrega.instancia != null && SistemaEntrega.instancia.temItem)
         {
             if (SistemaEntrega.instancia.itemNaMao == itemQueRecebe)
             {
@@ -20,6 +20,10 @@ public class NPCController : MonoBehaviour
                 {
                     StartCoroutine(ProcessarEntrega());
                 }
+            }
+            else
+            {
+                UIManager.instancia.MostrarMensagem("Preciso de: " + itemQueRecebe);
             }
         }
         else
@@ -31,7 +35,8 @@ public class NPCController : MonoBehaviour
     System.Collections.IEnumerator ProcessarEntrega()
     {
         UIManager.instancia.MostrarMensagem("Processando...");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         SistemaEntrega.instancia.PegarItem(itemQueEntrega);
+        UIManager.instancia.MostrarMensagem("Aqui está: " + itemQueEntrega);
     }
 }
