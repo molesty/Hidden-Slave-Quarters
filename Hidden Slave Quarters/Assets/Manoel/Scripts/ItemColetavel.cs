@@ -2,23 +2,33 @@ using UnityEngine;
 
 public class ItemColetavel : MonoBehaviour
 {
-    public string itemID;
-    public string descricao;
-    public int pontosConhecimento = 10;
+    [Header("Configuracao do Item")]
+    public string nomeItem;
+    public string tipoItem;
+    public string mensagemColeta;
+
+    [Header("Efeitos")]
+    public bool desapareceAposColeta = true;
 
     public void Coletar()
     {
-        if (SistemaEntrega.instancia != null)
+        switch (tipoItem)
         {
-            SistemaEntrega.instancia.PegarItem(itemID);
+            case "ChaveSenzala":
+                GameManager.instancia.temChaveSenzala = true;
+                break;
+            case "Ferramenta":
+                GameManager.instancia.temFerramentaFazenda = true;
+                break;
         }
 
-        GerenciadorMissoes.instancia.CompletarObjetivo("COLETOU_" + itemID);
+        InventoryManager.instancia?.AdicionarItem(tipoItem, nomeItem);
 
-        GerenciadorClicks.instancia.AdicionarConhecimento(pontosConhecimento);
+        SistemaMensagens.instancia?.MostrarMensagem(mensagemColeta);
 
-        UIManager.instancia.MostrarMensagem("Coletou: " + descricao);
-
-        gameObject.SetActive(false);
+        if (desapareceAposColeta)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
