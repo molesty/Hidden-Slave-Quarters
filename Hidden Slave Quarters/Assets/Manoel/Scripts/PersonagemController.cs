@@ -30,8 +30,36 @@ public class PersonagemController : MonoBehaviour
 
         ProcessarInput();
         HandleInteraction();
-        //AtualizarAnimacao();
+        AtualizarAnimacao();
         VerificarDetecao();
+    }
+    void HandleInteraction()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("Tecla E pressionada - Verificando interação...");
+            TentarInteragir();
+        }
+    }
+
+    void TentarInteragir()
+    {
+        Debug.Log("Tentando interagir...");
+        Collider2D[] interactables = Physics2D.OverlapCircleAll(transform.position, 2f);
+        Debug.Log("Encontrou " + interactables.Length + " objetos próximos");
+
+        foreach (Collider2D collider in interactables)
+        {
+            Debug.Log("Verificando objeto: " + collider.gameObject.name);
+
+            ItemColetavel item = collider.GetComponent<ItemColetavel>();
+            if (item != null)
+            {
+                Debug.Log("Item coletável encontrado: " + item.itemID);
+                item.Coletar();
+                return;
+            }
+        }
     }
 
     void ProcessarInput()
@@ -65,10 +93,24 @@ public class PersonagemController : MonoBehaviour
 
     void TentarInteragir()
     {
-        Collider2D[] interactables = Physics2D.OverlapCircleAll(transform.position, 1.5f);
+        Collider2D[] interactables = Physics2D.OverlapCircleAll(transform.position, 2f);
 
         foreach (Collider2D collider in interactables)
         {
+            ItemColetavel item = collider.GetComponent<ItemColetavel>();
+            if (item != null)
+            {
+                item.Coletar();
+                return;
+            }
+
+            NPCController npc = collider.GetComponent<NPCController>();
+            if (npc != null)
+            {
+                npc.Interagir();
+                return;
+            }
+
             ObjetoInterativo interactable = collider.GetComponent<ObjetoInterativo>();
             if (interactable != null)
             {
@@ -132,6 +174,16 @@ public class PersonagemController : MonoBehaviour
             {
                 guarda.DetectarJogador(transform.position);
             }
+        }
+    }
+
+    void AtualizarAnimacao()
+    {
+        
+        if (animator != null && animator.runtimeAnimatorController != null)
+        {
+            animator.SetFloat("Velocidade", movimento.magnitude);
+            animator.SetBool("Escondido", estaEscondido);
         }
     }
 

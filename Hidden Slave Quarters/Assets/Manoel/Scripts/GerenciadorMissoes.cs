@@ -52,35 +52,35 @@ public class GerenciadorMissoes : MonoBehaviour
         Missao fugaSenzala = new Missao
         {
             idMissao = "fuga_senzala",
-            titulo = "Fuga da Senzala",
-            descricao = "Encontre uma maneira de escapar da senzala observando os padroes dos guardas e aproveitando a tempestade.",
+            titulo = "Ferramenta da Liberdade",
+            descricao = "Encontre a chave velha e peca ao ferreiro para fazer uma copia",
             objetivos = new List<ObjetivoMissao>
-            {
-                new ObjetivoMissao
-                {
-                    idObjetivo = "observar_guardas",
-                    descricao = "Observe os padroes de movimento dos guardas",
-                    triggerCompletacao = "GUARDAS_OBSERVADOS"
-                },
-                new ObjetivoMissao
-                {
-                    idObjetivo = "encontrar_ferramenta",
-                    descricao = "Encontre uma ferramenta para ajudar na fuga",
-                    triggerCompletacao = "FERRAMENTA_ENCONTRADA"
-                },
-                new ObjetivoMissao
-                {
-                    idObjetivo = "esperar_tempestade",
-                    descricao = "Espere pela tempestade para cobrir o barulho",
-                    triggerCompletacao = "TEMPESTADE_CHEGOU"
-                },
-                new ObjetivoMissao
-                {
-                    idObjetivo = "escapar_senzala",
-                    descricao = "Fuja da senzala enquanto os guardas estao distraidos",
-                    triggerCompletacao = "SENZALA_ESCAPADA"
-                }
-            }
+    {
+        new ObjetivoMissao
+        {
+            idObjetivo = "encontrar_chave",
+            descricao = "Encontre a chave velha na senzala",
+            triggerCompletacao = "COLETOU_CHAVE_VELHA"
+        },
+        new ObjetivoMissao
+        {
+            idObjetivo = "levar_ferreiro",
+            descricao = "Leve a chave ao ferreiro",
+            triggerCompletacao = "ENTREGUE_CHAVE_VELHA_PARA_FERREIRO"
+        },
+        new ObjetivoMissao
+        {
+            idObjetivo = "pegar_copia",
+            descricao = "Pegue a copia da chave",
+            triggerCompletacao = "COLETOU_CHAVE_COPIA"
+        },
+        new ObjetivoMissao
+        {
+            idObjetivo = "usar_fechadura",
+            descricao = "Use a chave copia na fechadura",
+            triggerCompletacao = "USOU_CHAVE_COPIA_EM_FECHADURA"
+        }
+    }
         };
 
         Missao caminhoQuilombo = new Missao

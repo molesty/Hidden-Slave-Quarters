@@ -99,7 +99,7 @@ public class UIManager : MonoBehaviour
 
     public void AtualizarUI()
     {
-        // CORREÇÃO: Usar FindAnyObjectByType corretamente
+        
         var jogador = FindAnyObjectByType<PersonagemController>();
         if (jogador != null && textoPontosConhecimento != null)
         {
@@ -109,7 +109,7 @@ public class UIManager : MonoBehaviour
 
     void AtualizarIndicadoresJogador()
     {
-        // CORREÇÃO: Usar FindAnyObjectByType corretamente
+    
         var jogador = FindAnyObjectByType<PersonagemController>();
         if (jogador != null)
         {
