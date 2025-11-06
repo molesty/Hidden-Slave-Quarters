@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class MissaoSenzalaUI : MonoBehaviour
 {
-    [Header("Botões da Senzala")]
     public Button botaoFerro;
     public Button botaoChave;
     public Button botaoPorta;
+    public GameObject novoFundo;
 
     private bool ferroEncontrado = false;
     private bool chavePuxada = false;
@@ -15,7 +16,7 @@ public class MissaoSenzalaUI : MonoBehaviour
     {
         if (botaoFerro != null) botaoFerro.onClick.AddListener(ColetarFerro);
         if (botaoChave != null) botaoChave.onClick.AddListener(PuxarChave);
-        if (botaoPorta != null) botaoPorta.onClick.AddListener(AbrirPorta);
+        if (botaoPorta != null) botaoPorta.onClick.AddListener(() => StartCoroutine(AbrirPorta()));
     }
 
     void ColetarFerro()
@@ -23,13 +24,8 @@ public class MissaoSenzalaUI : MonoBehaviour
         if (!ferroEncontrado)
         {
             ferroEncontrado = true;
-            if (botaoFerro != null) botaoFerro.interactable = false;
+            botaoFerro.interactable = false;
             SistemaMensagens.instancia?.MostrarMensagem("Você encontrou um ferro velho.");
-            GerenciadorMissoes.instancia?.CompletarMissao("Encontrou o ferro");
-        }
-        else
-        {
-            SistemaMensagens.instancia?.MostrarMensagem("Você já pegou o ferro.");
         }
     }
 
@@ -37,17 +33,15 @@ public class MissaoSenzalaUI : MonoBehaviour
     {
         if (!ferroEncontrado)
         {
-            SistemaMensagens.instancia?.MostrarMensagem("Muito alto, não consigo alcançar", 1.5f);
+            SistemaMensagens.instancia?.MostrarMensagem("Você precisa de algo para puxar a chave.");
             return;
         }
 
         if (!chavePuxada)
         {
             chavePuxada = true;
-            if (botaoChave != null) botaoChave.interactable = false;
+            botaoChave.interactable = false;
             SistemaMensagens.instancia?.MostrarMensagem("Você conseguiu puxar uma chave com o ferro.");
-            GerenciadorMissoes.instancia?.CompletarMissao("Puxou a chave");
-            SenzalaProgress.temChave = true;
         }
         else
         {
@@ -55,16 +49,20 @@ public class MissaoSenzalaUI : MonoBehaviour
         }
     }
 
-    void AbrirPorta()
+    IEnumerator AbrirPorta()
     {
         if (!chavePuxada)
         {
             SistemaMensagens.instancia?.MostrarMensagem("A porta está trancada.");
-            return;
+            yield break;
         }
 
         SistemaMensagens.instancia?.MostrarMensagem("A porta se abriu. Você pode sair.");
-        GerenciadorMissoes.instancia?.CompletarMissao("Destrancou a porta");
+        if (novoFundo != null)
+        {
+            novoFundo.SetActive(true);
+            yield return new WaitForSeconds(1f);
+        }
 
         if (GameManager.instancia != null)
             GameManager.instancia.MudarCena("Fazenda");
