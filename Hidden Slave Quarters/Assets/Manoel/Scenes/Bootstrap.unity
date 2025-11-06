@@ -264,9 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1135642775}
-  - component: {fileID: 1135642774}
-  - component: {fileID: 1135642773}
-  - component: {fileID: 1135642772}
+  - component: {fileID: 1135642776}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -274,51 +272,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1135642772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135642771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8740d06c7caef454eb69f7d90b6fb226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SistemaClique
-  cameraPrincipal: {fileID: 1271070404}
-  distanciaMaxima: 10
---- !u!114 &1135642773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135642771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f28fc1fe9f56fd4e9fada88bc45e899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SistemaMensagens
-  painelMensagem: {fileID: 1767004634}
-  textoMensagem: {fileID: 725353812}
-  tempoMensagem: 3
---- !u!114 &1135642774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135642771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b01982efe368f94ea172756225f61fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  temChaveSenzala: 0
-  temFerramentaFazenda: 0
-  derrotouGuardas: 0
-  proximaCena: 
 --- !u!4 &1135642775
 Transform:
   m_ObjectHideFlags: 0
@@ -334,6 +287,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1135642776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135642771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b01982efe368f94ea172756225f61fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  estadoAtual: 0
 --- !u!1 &1271070402
 GameObject:
   m_ObjectHideFlags: 0
