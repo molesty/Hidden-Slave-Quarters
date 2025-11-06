@@ -1,36 +1,42 @@
-using System.Diagnostics;
 using UnityEngine;
-using Text = UnityEngine.UI.Text;
-using Debug = UnityEngine.Debug;
-
+using TMPro;
 
 public class SistemaMensagens : MonoBehaviour
 {
     public static SistemaMensagens instancia;
-    public Text textoMensagem;
-    public float tempoExibicao = 3f;
+    public TMP_Text textoMensagem;
+    public GameObject painelMensagem;
 
     void Awake()
     {
-        if (instancia == null) instancia = this;
-        else Destroy(gameObject);
-    }
-
-    public void MostrarMensagem(string msg)
-    {
-        Debug.Log(msg);
-
-        if (textoMensagem != null)
+        if (instancia == null)
         {
-            textoMensagem.text = msg;
-            CancelInvoke(nameof(LimparMensagem));
-            Invoke(nameof(LimparMensagem), tempoExibicao);
+            instancia = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
-    void LimparMensagem()
+    public void MostrarMensagem(string mensagem, float duracao = 2.5f)
     {
-        if (textoMensagem != null)
-            textoMensagem.text = "";
+        if (painelMensagem == null || textoMensagem == null)
+        {
+            UnityEngine.Debug.LogWarning("Painel ou texto de mensagem não configurados.");
+            return;
+        }
+
+        textoMensagem.text = mensagem;
+        painelMensagem.SetActive(true);
+        CancelInvoke(nameof(FecharMensagem));
+        Invoke(nameof(FecharMensagem), duracao);
+    }
+
+    void FecharMensagem()
+    {
+        if (painelMensagem != null)
+            painelMensagem.SetActive(false);
     }
 }

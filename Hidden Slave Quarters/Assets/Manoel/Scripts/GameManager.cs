@@ -5,9 +5,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instancia;
 
-    public enum EstadoJogo { Jogando, Pausado }
-    public EstadoJogo estadoAtual = EstadoJogo.Jogando;
-
     void Awake()
     {
         if (instancia == null)
