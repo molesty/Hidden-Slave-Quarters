@@ -4,7 +4,6 @@ using Debug = UnityEngine.Debug;
 public class GerenciadorMissoes : MonoBehaviour
 {
     public static GerenciadorMissoes instancia;
-
     public int totalMissoes = 3;
     private int missoesCompletas = 0;
 
@@ -14,17 +13,17 @@ public class GerenciadorMissoes : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public void CompletarMissao(string nomeMissao)
+    public void CompletarMissao(string nome)
     {
         missoesCompletas++;
-        UIManager.instancia?.Mostrar("Missão concluída: " + nomeMissao);
-        Debug.Log("Missão concluída: " + nomeMissao + " (" + missoesCompletas + "/" + totalMissoes + ")");
+
+        if (UIManager.instancia != null)
+        {
+            UIManager.instancia.Mostrar("Missão concluída: " + nome);
+        }
+
+        Debug.Log("Missão concluída: " + nome + " (" + missoesCompletas + "/" + totalMissoes + ")");
     }
 
-    public bool TodasConcluidas()
-    {
-        return missoesCompletas >= totalMissoes;
-    }
-
-    public int GetCompletas() { return missoesCompletas; }
+    public bool TodasConcluidas() => missoesCompletas >= totalMissoes;
 }

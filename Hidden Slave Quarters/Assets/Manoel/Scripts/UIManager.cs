@@ -1,5 +1,8 @@
 using UnityEngine;
 using TMPro;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -8,11 +11,22 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI textoMensagem;
     public float tempoMensagem = 2.5f;
 
+    void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Awake()
     {
-        if (instancia == null) instancia = this;
-        else Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
+        if (instancia == null)
+        {
+            instancia = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Mostrar(string msg)
