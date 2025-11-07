@@ -1,70 +1,55 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
 
 public class MissaoFazendaUI : MonoBehaviour
 {
-    public Button botaoAgua;
     public Button botaoFerramenta;
-    public Button botaoSair;
+    public Button botaoBalde;
+    public Button botaoMudarDia;
+    public string cenaSenzalaEvento = "SenzalaEvento";
 
-    private bool aguaPega = false;
-    private bool ferramentaPega = false;
+    bool pegouFerramenta = false;
+    bool pegouBalde = false;
 
     void Start()
     {
-        if (botaoAgua != null) botaoAgua.onClick.AddListener(PegarAgua);
         if (botaoFerramenta != null) botaoFerramenta.onClick.AddListener(PegarFerramenta);
-        if (botaoSair != null) botaoSair.onClick.AddListener(TentarSair);
-        AtualizarBotaoSair();
-    }
+        if (botaoBalde != null) botaoBalde.onClick.AddListener(PegarBalde);
+        if (botaoMudarDia != null) botaoMudarDia.onClick.AddListener(MudarDia);
 
-    void PegarAgua()
-    {
-        if (aguaPega)
-        {
-            SistemaMensagens.instancia?.MostrarMensagem("Você já pegou água.");
-            return;
-        }
-
-        aguaPega = true;
-        SistemaMensagens.instancia?.MostrarMensagem("Você pegou um balde de água.");
-        botaoAgua.interactable = false;
-        AtualizarBotaoSair();
+        if (botaoMudarDia != null) botaoMudarDia.gameObject.SetActive(false);
     }
 
     void PegarFerramenta()
     {
-        if (ferramentaPega)
-        {
-            SistemaMensagens.instancia?.MostrarMensagem("Você já pegou a ferramenta.");
-            return;
-        }
-
-        ferramentaPega = true;
-        SistemaMensagens.instancia?.MostrarMensagem("Você achou uma ferramenta útil.");
+        if (pegouFerramenta) { SistemaMensagens.instancia?.MostrarMensagem("Já pegou a ferramenta."); return; }
+        pegouFerramenta = true;
         botaoFerramenta.interactable = false;
-        AtualizarBotaoSair();
+        SistemaMensagens.instancia?.MostrarMensagem("Você achou uma ferramenta útil.", 1.5f);
+        VerificarLiberarBotao();
     }
 
-    void TentarSair()
+    void PegarBalde()
     {
-        if (!aguaPega || !ferramentaPega)
+        if (pegouBalde) { SistemaMensagens.instancia?.MostrarMensagem("Já pegou o balde."); return; }
+        pegouBalde = true;
+        botaoBalde.interactable = false;
+        SistemaMensagens.instancia?.MostrarMensagem("Você pegou um balde de água.", 1.5f);
+        VerificarLiberarBotao();
+    }
+
+    void VerificarLiberarBotao()
+    {
+        if (pegouFerramenta && pegouBalde)
         {
-            SistemaMensagens.instancia?.MostrarMensagem("Ainda falta algo para levar.");
-            return;
+            if (botaoMudarDia != null) botaoMudarDia.gameObject.SetActive(true);
+            SistemaMensagens.instancia?.MostrarMensagem("Tudo pronto, pode ir.", 1.5f);
         }
-
-        SistemaMensagens.instancia?.MostrarMensagem("Você concluiu tudo, saindo...");
-        if (GameManager.instancia != null)
-            GameManager.instancia.MudarCena("ProximaCena");
-        else
-            Debug.LogWarning("GameManager.instancia não encontrado!");
     }
 
-    void AtualizarBotaoSair()
+    void MudarDia()
     {
-        if (botaoSair == null) return;
-        botaoSair.interactable = aguaPega && ferramentaPega;
+        if (botaoMudarDia != null) botaoMudarDia.interactable = false;
+        SceneFader.instancia?.FadeToScene(cenaSenzalaEvento);
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MissaoSenzalaUI : MonoBehaviour
@@ -63,10 +64,8 @@ public class MissaoSenzalaUI : MonoBehaviour
             novoFundo.SetActive(true);
             yield return new WaitForSeconds(1f);
         }
-
-        if (GameManager.instancia != null)
-            GameManager.instancia.MudarCena("Fazenda");
-        else
-            Debug.LogWarning("GameManager.instancia não encontrado!");
+        FazendaProgress.liberto = true;
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Victory"); 
     }
 }

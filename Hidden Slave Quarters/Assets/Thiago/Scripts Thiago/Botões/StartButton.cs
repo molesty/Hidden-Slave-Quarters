@@ -5,6 +5,6 @@ public class StartButton : MonoBehaviour
 {
     public void LoadScene()
     {
-        SceneManager.LoadScene("GAME1");
+        SceneManager.LoadScene("Senzala");
     }
 }

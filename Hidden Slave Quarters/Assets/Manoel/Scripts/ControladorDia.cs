@@ -1,43 +1,55 @@
+using System.Collections;
 using UnityEngine;
-using TMPro;
 
 public class ControladorDia : MonoBehaviour
 {
-    public CanvasGroup fade;
-    public TMP_Text textoDia;
+    public static ControladorDia instancia;
+    public int diaAtual = 1;
+    public bool diaEmAndamento;
+
+    void Awake()
+    {
+        instancia = this;
+    }
 
     void Start()
     {
-        StartCoroutine(InicioDia());
+        StartCoroutine(InicioDiaSeguro());
     }
 
-    System.Collections.IEnumerator InicioDia()
+    IEnumerator InicioDiaSeguro()
     {
-        textoDia.text = "Dia " + GameManager.instancia.diaAtual;
-        fade.alpha = 1;
-        yield return new WaitForSeconds(1.5f);
-        while (fade.alpha > 0)
+        yield return new WaitForSeconds(1f);
+        if (GameManager.instancia == null)
         {
-            fade.alpha -= Time.deltaTime;
-            yield return null;
+            Debug.LogWarning("ControladorDia: GameManager.instancia nulo (usando dia 1).");
         }
-    }
-
-    public void TerminarTrabalho()
-    {
-        StartCoroutine(FimDia());
-    }
-
-    System.Collections.IEnumerator FimDia()
-    {
-        textoDia.text = "Anoitecendo...";
-        while (fade.alpha < 1)
+        else
         {
-            fade.alpha += Time.deltaTime;
-            yield return null;
+            GameManager.instancia.AtualizarDia(diaAtual);
         }
+        diaEmAndamento = true;
+    }
 
-        yield return new WaitForSeconds(1.5f);
-        GameManager.instancia.ProximoDia();
+    public void FimDia()
+    {
+        if (!diaEmAndamento) return;
+        diaEmAndamento = false;
+        StartCoroutine(FimDiaSeguro());
+    }
+
+    IEnumerator FimDiaSeguro()
+    {
+        yield return new WaitForSeconds(1f);
+        if (GameManager.instancia == null)
+        {
+            Debug.Log("ControladorDia: avançaria o dia, mas GameManager.instancia é nulo.");
+        }
+        else
+        {
+            diaAtual++;
+            GameManager.instancia.AtualizarDia(diaAtual);
+        }
+        diaEmAndamento = true;
     }
 }
