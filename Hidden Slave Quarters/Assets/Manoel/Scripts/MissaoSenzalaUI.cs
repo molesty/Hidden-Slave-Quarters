@@ -66,6 +66,6 @@ public class MissaoSenzalaUI : MonoBehaviour
         }
         FazendaProgress.liberto = true;
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("Victory"); 
+        SceneManager.LoadScene("fazenda"); 
     }
 }
