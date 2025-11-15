@@ -1,55 +1,42 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControladorDia : MonoBehaviour
 {
-    public static ControladorDia instancia;
-    public int diaAtual = 1;
-    public bool diaEmAndamento;
-
-    void Awake()
-    {
-        instancia = this;
-    }
+    public Text textoDia;
 
     void Start()
     {
-        StartCoroutine(InicioDiaSeguro());
-    }
-
-    IEnumerator InicioDiaSeguro()
-    {
-        yield return new WaitForSeconds(1f);
         if (GameManager.instancia == null)
         {
-            Debug.LogWarning("ControladorDia: GameManager.instancia nulo (usando dia 1).");
+            Debug.LogWarning("GameManager não encontrado no ControladorDia");
+            return;
         }
-        else
-        {
-            GameManager.instancia.AtualizarDia(diaAtual);
-        }
-        diaEmAndamento = true;
+
+        AtualizarTextoDia();
     }
 
-    public void FimDia()
+    public void ProximoDia()
     {
-        if (!diaEmAndamento) return;
-        diaEmAndamento = false;
-        StartCoroutine(FimDiaSeguro());
+        if (GameManager.instancia == null) return;
+
+        GameManager.instancia.AvancarDia();
+        AtualizarTextoDia();
     }
 
-    IEnumerator FimDiaSeguro()
+    public void DefinirDia(int novoDia)
     {
-        yield return new WaitForSeconds(1f);
-        if (GameManager.instancia == null)
+        if (GameManager.instancia == null) return;
+
+        GameManager.instancia.MudarDia(novoDia);
+        AtualizarTextoDia();
+    }
+
+    void AtualizarTextoDia()
+    {
+        if (textoDia != null)
         {
-            Debug.Log("ControladorDia: avançaria o dia, mas GameManager.instancia é nulo.");
+            textoDia.text = "Dia " + GameManager.instancia.diaAtual;
         }
-        else
-        {
-            diaAtual++;
-            GameManager.instancia.AtualizarDia(diaAtual);
-        }
-        diaEmAndamento = true;
     }
 }

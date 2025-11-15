@@ -302,51 +302,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350540861}
   m_CullTransparentMesh: 1
---- !u!1 &350679457
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 350679459}
-  - component: {fileID: 350679458}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &350679458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350679457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b01982efe368f94ea172756225f61fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  diaAtual: 1
---- !u!4 &350679459
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350679457}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &364917120
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,7 +722,7 @@ GameObject:
   - component: {fileID: 1025344120}
   - component: {fileID: 1025344119}
   m_Layer: 0
-  m_Name: InputHandler
+  m_Name: SistemaClique
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1086,7 +1041,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1376936653}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1726650263}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: AbrirPorta
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1376936653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,7 +1232,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1436486297}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1726650263}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ColetouChave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &1436486300
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1312,54 +1291,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
---- !u!1 &1598331363
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1598331365}
-  - component: {fileID: 1598331364}
-  m_Layer: 0
-  m_Name: MissaoSenzala
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1598331364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598331363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92c5666d5609ed646bf89611078caf94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissaoSenzalaUI
-  botaoFerro: {fileID: 1873424766}
-  botaoChave: {fileID: 1436486299}
-  botaoPorta: {fileID: 1376936652}
-  novoFundo: {fileID: 1809054945}
---- !u!4 &1598331365
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598331363}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.78056, y: 0.0489, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1681986611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,7 +1411,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b01982efe368f94ea172756225f61fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  estadoAtual: 1
+  ferroColetado: 0
+  chaveColetada: 0
+  derrotouGuardas: 0
   diaAtual: 1
+  cenaInicial: Senzala
+  manterEntreCenas: 1
 --- !u!4 &1726650264
 Transform:
   m_ObjectHideFlags: 0
@@ -1800,7 +1737,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1873424764}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1726650263}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ColetouFerro
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2094634375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,10 +1850,8 @@ SceneRoots:
   - {fileID: 2094634378}
   - {fileID: 1726650264}
   - {fileID: 270485403}
-  - {fileID: 1809436274}
-  - {fileID: 1025344120}
-  - {fileID: 1598331365}
   - {fileID: 1681986613}
+  - {fileID: 1025344120}
   - {fileID: 765867301}
-  - {fileID: 350679459}
+  - {fileID: 1809436274}
   - {fileID: 471490747}
