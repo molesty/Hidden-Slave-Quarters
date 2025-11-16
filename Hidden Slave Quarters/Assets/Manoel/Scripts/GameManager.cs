@@ -19,22 +19,20 @@ public class GameManager : MonoBehaviour
     public string cenaInicial = ""; 
 
     [Header("Opções")]
-    public bool manterEntreCenas = true; 
+    public bool manterEntreCenas = true;
 
     void Awake()
     {
         if (instancia == null)
         {
             instancia = this;
-            if (manterEntreCenas)
-                DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this);
             return;
         }
-
     }
 
     public void ColetouFerro()

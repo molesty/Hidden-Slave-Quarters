@@ -15,6 +15,12 @@ EditorBuildSettings:
     path: Assets/Manoel/Scenes/Fazenda.unity
     guid: eefcb3caf9fb9b54c80156d78dbbd84a
   - enabled: 1
+    path: Assets/Manoel/Scenes/Senzala2.unity
+    guid: 597a13a04f1c796409b4ba8505834652
+  - enabled: 1
+    path: Assets/Manoel/Scenes/Fazenda1.unity
+    guid: c1652a2cae0a7ed48813eb1e434ae6a4
+  - enabled: 1
     path: Assets/Manoel/Scenes/SenzalaEvento.unity
     guid: c0addfdb6778c3e46992297bb1890170
   - enabled: 0
