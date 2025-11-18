@@ -6,178 +6,179 @@ public class MissaoFazenda : MonoBehaviour
     public Button botaoFerramenta;
     public Button botaoBalde;
     public Button botaoPoco;
-    public Button[] pontosPlanta;
+    public Button ponto1;
+    public Button ponto2;
+    public Button ponto3;
     public Button botaoMudarDia;
-    public string cenaSenzalaEvento;
-    public int capacidadeAgua = 3;
 
-    int regou = 0;
-    int carga = 0;
+    public GameObject pocoQuebrado;
+    public GameObject pocoArrumado;
+
+    public GameObject baldeVazio;
+    public GameObject baldeCheio;
+
     bool pegouFerramenta = false;
     bool pegouBalde = false;
-    bool pocoArrumado = false;
-    bool[] jaRegou;
+    bool pocoArrumadoFlag = false;
+    bool temAgua = false;
+    bool regou1 = false;
+    bool regou2 = false;
+    bool regou3 = false;
 
     void Start()
     {
-        if (pontosPlanta == null) pontosPlanta = new Button[0];
-        jaRegou = new bool[pontosPlanta.Length];
-
-        FazendaProgress.temAgua = false;
-        FazendaProgress.temFerramenta = false;
-        FazendaProgress.falouComFazendeiro = false;
-
         if (botaoFerramenta != null) botaoFerramenta.onClick.AddListener(PegarFerramenta);
         if (botaoBalde != null) botaoBalde.onClick.AddListener(PegarBalde);
         if (botaoPoco != null) botaoPoco.onClick.AddListener(AcaoPoco);
+        if (ponto1 != null) ponto1.onClick.AddListener(() => Regar(1));
+        if (ponto2 != null) ponto2.onClick.AddListener(() => Regar(2));
+        if (ponto3 != null) ponto3.onClick.AddListener(() => Regar(3));
+        if (botaoMudarDia != null) botaoMudarDia.onClick.AddListener(MudarDia);
 
-        for (int i = 0; i < pontosPlanta.Length; i++)
-        {
-            int id = i;
-            if (pontosPlanta[i] != null)
-            {
-                pontosPlanta[i].onClick.RemoveAllListeners();
-                pontosPlanta[i].onClick.AddListener(() => Regar(id));
-            }
-        }
+        if (botaoMudarDia != null) botaoMudarDia.gameObject.SetActive(false);
 
-        if (botaoMudarDia != null)
-        {
-            botaoMudarDia.onClick.RemoveAllListeners();
-            botaoMudarDia.onClick.AddListener(MudarDia);
-            botaoMudarDia.gameObject.SetActive(false);
-            botaoMudarDia.interactable = false;
-        }
-
-        AtualizarUI();
+        AtualizarPoço();
+        AtualizarBalde();
+        AtualizarInteracoes();
     }
 
     void PegarFerramenta()
     {
-        if (pegouFerramenta) { SistemaMensagens.instancia?.MostrarMensagem("Já pegou a ferramenta."); return; }
+        if (pegouFerramenta) return;
         pegouFerramenta = true;
         FazendaProgress.temFerramenta = true;
         if (botaoFerramenta != null) botaoFerramenta.interactable = false;
-        SistemaMensagens.instancia?.MostrarMensagem("Você pegou a ferramenta.");
-        AtualizarUI();
-        VerificarCompleto();
+        SistemaMensagens.instancia?.MostrarMensagem("Você pegou um ferro");
+        VerificarLiberar();
     }
 
     void PegarBalde()
     {
-        if (pegouBalde) { SistemaMensagens.instancia?.MostrarMensagem("Já pegou o balde."); return; }
+        if (pegouBalde) return;
         pegouBalde = true;
+        FazendaProgress.temBalde = true;
         if (botaoBalde != null) botaoBalde.interactable = false;
-        SistemaMensagens.instancia?.MostrarMensagem("Você pegou o balde.");
-        AtualizarUI();
-        VerificarCompleto();
+        SistemaMensagens.instancia?.MostrarMensagem("Você pegou o balde");
+        AtualizarBalde();
+        VerificarLiberar();
     }
 
     void AcaoPoco()
     {
         if (!pegouFerramenta)
         {
-            SistemaMensagens.instancia?.MostrarMensagem("Você precisa da ferramenta para usar o poço.");
+            SistemaMensagens.instancia?.MostrarMensagem("Você precisa arrumar o poço!");
+            return;
+        }
+
+        if (!pocoArrumadoFlag)
+        {
+            pocoArrumadoFlag = true;
+            FazendaProgress.pocoArrumado = true;
+            AtualizarPoço();
+            SistemaMensagens.instancia?.MostrarMensagem("Você arrumou o poço");
+            VerificarLiberar();
             return;
         }
 
         if (!pegouBalde)
         {
-            SistemaMensagens.instancia?.MostrarMensagem("Você precisa do balde para tirar água.");
+            SistemaMensagens.instancia?.MostrarMensagem("Pegue o balde primeiro");
             return;
         }
 
-        if (!pocoArrumado)
-        {
-            pocoArrumado = true;
-            FazendaProgress.falouComFazendeiro = true;
-            SistemaMensagens.instancia?.MostrarMensagem("Você arrumou o poço.");
-            AtualizarUI();
-            VerificarCompleto();
-            return;
-        }
-
-        carga = capacidadeAgua;
+        temAgua = true;
         FazendaProgress.temAgua = true;
-        SistemaMensagens.instancia?.MostrarMensagem("Você encheu o balde. Capacidade: " + carga);
-        AtualizarUI();
+        AtualizarBalde();
+        SistemaMensagens.instancia?.MostrarMensagem("Você encheu o balde");
+        AtualizarInteracoes();
     }
 
     void Regar(int i)
     {
-        if (i < 0 || i >= pontosPlanta.Length) return;
-        if (pontosPlanta[i] == null) return;
-        if (jaRegou[i]) return;
-
-        if (carga <= 0)
+        if (!pegouBalde)
         {
-            SistemaMensagens.instancia?.MostrarMensagem("O balde está vazio, encha no poço.");
+            SistemaMensagens.instancia?.MostrarMensagem("Você precisa do balde");
             return;
         }
 
-        jaRegou[i] = true;
-        pontosPlanta[i].interactable = false;
-        regou++;
-        carga--;
-        if (carga == 0) FazendaProgress.temAgua = false;
-        SistemaMensagens.instancia?.MostrarMensagem("Você regou a planta. Água restante: " + carga);
-        AtualizarUI();
-        VerificarCompleto();
+        if (!temAgua)
+        {
+            SistemaMensagens.instancia?.MostrarMensagem("O balde está vazio");
+            return;
+        }
+
+        if (i == 1 && !regou1) regou1 = true;
+        else if (i == 2 && !regou2) regou2 = true;
+        else if (i == 3 && !regou3) regou3 = true;
+        else return;
+
+        temAgua = false;
+        FazendaProgress.temAgua = false;
+        AtualizarBalde();
+        SistemaMensagens.instancia?.MostrarMensagem("Você regou a plantação");
+        AtualizarInteracoes();
+        VerificarLiberar();
     }
 
-    void VerificarCompleto()
+    void AtualizarPoço()
     {
-        bool todasRegadas = true;
-        for (int i = 0; i < jaRegou.Length; i++) if (!jaRegou[i]) { todasRegadas = false; break; }
+        if (pocoQuebrado != null) pocoQuebrado.SetActive(!pocoArrumadoFlag);
+        if (pocoArrumado != null) pocoArrumado.SetActive(pocoArrumadoFlag);
+    }
 
-        if (pegouFerramenta && pegouBalde && pocoArrumado && todasRegadas)
+    void AtualizarBalde()
+    {
+        if (!pegouBalde)
         {
-            if (botaoMudarDia != null)
-            {
-                botaoMudarDia.gameObject.SetActive(true);
-                botaoMudarDia.interactable = true;
-                SistemaMensagens.instancia?.MostrarMensagem("Tudo pronto, pode mudar o dia.");
-            }
+            if (baldeVazio != null) baldeVazio.SetActive(true);
+            if (baldeCheio != null) baldeCheio.SetActive(false);
+            return;
+        }
+
+        if (baldeVazio != null) baldeVazio.SetActive(!temAgua);
+        if (baldeCheio != null) baldeCheio.SetActive(temAgua);
+    }
+
+    void AtualizarInteracoes()
+    {
+        bool pode = temAgua;
+        if (ponto1 != null) ponto1.interactable = !regou1 && pode;
+        if (ponto2 != null) ponto2.interactable = !regou2 && pode;
+        if (ponto3 != null) ponto3.interactable = !regou3 && pode;
+    }
+
+    void VerificarLiberar()
+    {
+        AtualizarPoço();
+        AtualizarBalde();
+        AtualizarInteracoes();
+
+        if (pegouFerramenta && pegouBalde && pocoArrumadoFlag && regou1 && regou2 && regou3)
+        {
+            if (botaoMudarDia != null) botaoMudarDia.gameObject.SetActive(true);
             FazendaProgress.liberto = true;
-        }
-    }
-
-    void AtualizarUI()
-    {
-        if (botaoPoco != null)
-        {
-            botaoPoco.interactable = pegouFerramenta && pegouBalde;
-        }
-
-        for (int i = 0; i < pontosPlanta.Length; i++)
-        {
-            if (pontosPlanta[i] != null)
-            {
-                pontosPlanta[i].interactable = !jaRegou[i] && (carga > 0);
-            }
         }
     }
 
     void MudarDia()
     {
-        if (!(pegouFerramenta && pegouBalde && pocoArrumado && regou >= pontosPlanta.Length))
+        if (!(pegouFerramenta && pegouBalde && pocoArrumadoFlag && regou1 && regou2 && regou3))
         {
-            SistemaMensagens.instancia?.MostrarMensagem("Ainda falta completar as missões.");
+            SistemaMensagens.instancia?.MostrarMensagem("Ainda falta completar tudo");
             return;
         }
 
         if (SceneFader.instancia != null)
         {
-            SceneFader.instancia.FadeToScene(cenaSenzalaEvento);
+            SceneFader.instancia.FadeToScene("Senzala2");
             return;
         }
 
         if (GameManager.instancia != null)
         {
-            GameManager.instancia.MudarCena(cenaSenzalaEvento);
+            GameManager.instancia.MudarCena("Senzala2");
             return;
         }
-
-        Debug.LogWarning("Nenhum sistema de troca de cena encontrado");
     }
 }

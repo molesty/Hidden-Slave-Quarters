@@ -10,13 +10,13 @@ public class GameManager : MonoBehaviour
     public EstadoJogo estadoAtual = EstadoJogo.Jogando;
 
     [Header("Progresso (Senzala / Fazenda)")]
-    public bool ferroColetado = false;    
-    public bool chaveColetada = false;    
-    public bool derrotouGuardas = false;  
+    public bool ferroColetado = false;
+    public bool chaveColetada = false;
+    public bool derrotouGuardas = false;
 
     [Header("Dia / Cena")]
     public int diaAtual = 1;
-    public string cenaInicial = ""; 
+    public string cenaInicial = "";
 
     [Header("Opções")]
     public bool manterEntreCenas = true;
@@ -100,7 +100,6 @@ public class GameManager : MonoBehaviour
         diaAtual = novoDia;
         Debug.Log("GameManager: dia definido para " + diaAtual);
     }
-
 
     public void ResetProgresso()
     {
