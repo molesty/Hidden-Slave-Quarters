@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 73a37faed5174c14496c1836d7c1a702
+guid: f76f4297beacc724f9227451ec937594
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2908572768565141055
-    second: "Fazenda1Planta\xE7\xE3o_0"
+      213: -1424136580587880603
+    second: Fazenda1Colhida_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Fazenda1Planta\xE7\xE3o_0"
+      name: Fazenda1Colhida_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1c1ec4e2a7ca2a7d0800000000000000
-      internalID: -2908572768565141055
+      spriteID: 56f7b6a43537c3ce0800000000000000
+      internalID: -1424136580587880603
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "Fazenda1Planta\xE7\xE3o_0": -2908572768565141055
+      Fazenda1Colhida_0: -1424136580587880603
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

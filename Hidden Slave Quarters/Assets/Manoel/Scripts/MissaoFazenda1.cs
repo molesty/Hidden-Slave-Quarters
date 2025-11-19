@@ -12,35 +12,50 @@ public class MissaoFazenda1 : MonoBehaviour
     public GameObject painelMensagem;
     public TMP_Text textoMensagem;
 
+    public Image vignette;
+    public float vignetteMax = 0.55f;
+
     public int cliquesNecessarios = 10;
 
-    private int cliques;
-    private bool colheu;
-    private float intensidade;
+    int cliques;
+    bool colheu;
+    float shake;
+    float zoom;
 
     void Start()
     {
         fundoNormal.SetActive(true);
         fundoColhido.SetActive(false);
-        textoContagem.text = "0 / " + cliquesNecessarios;
-
         painelMensagem.SetActive(false);
-
+        textoContagem.text = "0 / " + cliquesNecessarios;
+        if (vignette != null) vignette.color = new Color(0, 0, 0, 0);
         botaoColher.onClick.AddListener(Colher);
     }
 
     void Update()
     {
-        if (intensidade > 0)
+        if (shake > 0)
         {
-            intensidade -= Time.deltaTime * 3f;
-            float x = Random.Range(-intensidade, intensidade);
-            float y = Random.Range(-intensidade, intensidade);
+            shake -= Time.deltaTime * 3f;
+            float s = shake;
+            float x = Random.Range(-s, s);
+            float y = Random.Range(-s, s);
             Camera.main.transform.localPosition = new Vector3(x, y, -10);
         }
-        else
+        else Camera.main.transform.localPosition = new Vector3(0, 0, -10);
+
+        if (zoom > 0)
         {
-            Camera.main.transform.localPosition = new Vector3(0, 0, -10);
+            zoom -= Time.deltaTime * 1.5f;
+            float alvo = 5 - (cliques * 0.03f);
+            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, alvo, 10 * Time.deltaTime);
+        }
+        else Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 5, 3 * Time.deltaTime);
+
+        if (vignette != null)
+        {
+            float alvo = (float)cliques / cliquesNecessarios * vignetteMax;
+            vignette.color = new Color(0, 0, 0, Mathf.Lerp(vignette.color.a, alvo, 5 * Time.deltaTime));
         }
     }
 
@@ -51,16 +66,15 @@ public class MissaoFazenda1 : MonoBehaviour
         cliques++;
         textoContagem.text = cliques + " / " + cliquesNecessarios;
 
-        intensidade = 0.1f + (cliques * 0.02f);
+        shake = 0.1f + cliques * 0.02f;
+        zoom = 1f;
 
         if (cliques >= cliquesNecessarios)
         {
             colheu = true;
-
             fundoNormal.SetActive(false);
             fundoColhido.SetActive(true);
             botaoColher.gameObject.SetActive(false);
-
             painelMensagem.SetActive(true);
             textoMensagem.text = "Plantação colhida!";
         }
