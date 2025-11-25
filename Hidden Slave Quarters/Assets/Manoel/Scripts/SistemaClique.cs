@@ -4,8 +4,26 @@ public class SistemaClique : MonoBehaviour
 {
     public Camera cameraPrincipal;
 
+    void Start()
+    {
+        if (cameraPrincipal == null)
+            cameraPrincipal = Camera.main;
+    }
+
+    void OnEnable()
+    {
+        cameraPrincipal = Camera.main;
+    }
+
     void Update()
     {
+
+        if (cameraPrincipal == null)
+        {
+            cameraPrincipal = Camera.main;
+            if (cameraPrincipal == null) return; 
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mouseWorld = cameraPrincipal.ScreenToWorldPoint(Input.mousePosition);
@@ -27,7 +45,6 @@ public class SistemaClique : MonoBehaviour
                     porta.TentarMudarCena();
                     return;
                 }
-
             }
         }
     }

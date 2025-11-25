@@ -927,7 +927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13.165, y: -137.1}
+  m_AnchoredPosition: {x: -199.7, y: -78.1}
   m_SizeDelta: {x: 26.33, y: 26.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1436486297
@@ -1146,9 +1146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   estadoAtual: 1
-  ferroColetado: 0
-  chaveColetada: 0
-  derrotouGuardas: 0
   diaAtual: 1
   manterEntreCenas: 1
 --- !u!4 &1726650264

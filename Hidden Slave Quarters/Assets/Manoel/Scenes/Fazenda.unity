@@ -257,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &334945195
 RectTransform:
   m_ObjectHideFlags: 0
@@ -325,7 +325,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 365394670}
-  - component: {fileID: 365394671}
   - component: {fileID: 365394672}
   - component: {fileID: 365394673}
   m_Layer: 0
@@ -350,33 +349,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &365394671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365394668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2ac80a84d79a644dbc0602f8ef969b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissaoFazenda
-  painelMensagem: {fileID: 0}
-  textoMensagem: {fileID: 0}
-  botaoFerramenta: {fileID: 260128967}
-  botaoBalde: {fileID: 1956929103}
-  botaoPoco: {fileID: 1966271761}
-  ponto1: {fileID: 1084371024}
-  ponto2: {fileID: 864310443}
-  ponto3: {fileID: 1498950868}
-  botaoMudarDia: {fileID: 1662262757}
-  pocoQuebrado: {fileID: 1708955022}
-  pocoArrumado: {fileID: 334945194}
-  baldeVazio: {fileID: 1220188487}
-  baldeCheio: {fileID: 419589737}
-  textoExplicativo: 
-  tempoAutoFechar: 4
 --- !u!114 &365394672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,12 +362,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   estadoAtual: 1
-  ferroColetado: 0
-  chaveColetada: 0
-  derrotouGuardas: 0
   diaAtual: 1
-  cenaInicial: 
   manterEntreCenas: 1
+  missaoScript: {fileID: 0}
 --- !u!114 &365394673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,6 +620,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579130790}
   m_CullTransparentMesh: 1
+--- !u!1 &598540397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 598540399}
+  - component: {fileID: 598540398}
+  m_Layer: 0
+  m_Name: Missao
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &598540398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598540397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ac80a84d79a644dbc0602f8ef969b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissaoFazenda
+  painelMensagem: {fileID: 579130790}
+  textoMensagem: {fileID: 1891690067}
+  botaoFerramenta: {fileID: 260128967}
+  botaoBalde: {fileID: 1956929103}
+  botaoPoco: {fileID: 1966271761}
+  ponto1: {fileID: 1084371024}
+  ponto2: {fileID: 864310443}
+  ponto3: {fileID: 1498950868}
+  botaoMudarDia: {fileID: 1662262757}
+  pocoQuebrado: {fileID: 1708955022}
+  pocoArrumado: {fileID: 334945194}
+  baldeVazio: {fileID: 1220188487}
+  baldeCheio: {fileID: 419589737}
+  textoExplicativo: 
+  tempoAutoFechar: 4
+--- !u!4 &598540399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598540397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.21956, y: 0.20102, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &703632305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,7 +1273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1220188488
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1588,7 +1616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1662262756
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1708,7 +1736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1708955023
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1766,6 +1794,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708955022}
   m_CullTransparentMesh: 1
+--- !u!1 &1882066401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1882066403}
+  - component: {fileID: 1882066402}
+  m_Layer: 0
+  m_Name: SistemaClique
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1882066402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882066401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8740d06c7caef454eb69f7d90b6fb226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SistemaClique
+  cameraPrincipal: {fileID: 723948170}
+--- !u!4 &1882066403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882066401}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.21956, y: 0.20102, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1891690065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1826,7 +1899,8 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6af8e0526f9645449936654b05b3aeb9, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 266758000814165849, guid: 6af8e0526f9645449936654b05b3aeb9,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1891,7 +1965,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1891690068
@@ -2360,3 +2434,5 @@ SceneRoots:
   - {fileID: 365394670}
   - {fileID: 1994535841}
   - {fileID: 703632307}
+  - {fileID: 598540399}
+  - {fileID: 1882066403}

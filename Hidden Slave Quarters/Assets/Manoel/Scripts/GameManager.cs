@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public int diaAtual = 1;
     public bool manterEntreCenas = true;
 
+    [Header("Referências da Cena")]
+    public Missao missaoScript; // Será carregado automaticamente
+
     void Awake()
     {
         if (instancia == null)
@@ -23,6 +26,27 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Chamado sempre que uma cena é carregada
+    void OnSceneLoaded(Scene cena, LoadSceneMode modo)
+    {
+        missaoScript = FindObjectOfType<Missao>();
+
+        if (missaoScript != null)
+            Debug.Log("GameManager: Missão encontrada na cena!");
+        else
+            Debug.LogWarning("GameManager: Nenhuma missão encontrada na cena.");
     }
 
     public void AvancarDia()
@@ -57,6 +81,8 @@ public class GameManager : MonoBehaviour
     [ContextMenu("ImprimirStatus")]
     public void ImprimirStatus()
     {
-        Debug.Log($"Status -> Dia:{diaAtual} Cena:{SceneManager.GetActiveScene().name}");
+        string cenaAtual = SceneManager.GetActiveScene().name;
+        string missaoStatus = missaoScript != null ? "Missão pronta" : "Sem missão";
+        Debug.Log($"Status -> Dia:{diaAtual} Cena:{cenaAtual} | {missaoStatus}");
     }
 }

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MissaoFazenda1 : MonoBehaviour
 {
@@ -8,28 +10,35 @@ public class MissaoFazenda1 : MonoBehaviour
     public GameObject fundoNormal;
     public GameObject fundoColhido;
     public TMP_Text textoContagem;
-
     public GameObject painelMensagem;
     public TMP_Text textoMensagem;
-
-    public Image vignette;
-    public float vignetteMax = 0.55f;
-
     public int cliquesNecessarios = 10;
+    public Button botaoMudarDia;
 
-    int cliques;
-    bool colheu;
-    float shake;
-    float zoom;
+    private int cliques;
+    private bool colheu;
+    private float shake;
+    private float zoom;
+    private AudioSource _audio;
 
     void Start()
     {
-        fundoNormal.SetActive(true);
-        fundoColhido.SetActive(false);
-        painelMensagem.SetActive(false);
-        textoContagem.text = "0 / " + cliquesNecessarios;
-        if (vignette != null) vignette.color = new Color(0, 0, 0, 0);
-        botaoColher.onClick.AddListener(Colher);
+        if (fundoNormal != null) fundoNormal.SetActive(true);
+        if (fundoColhido != null) fundoColhido.SetActive(false);
+        if (painelMensagem != null) painelMensagem.SetActive(false);
+        if (textoContagem != null) textoContagem.text = "0 / " + cliquesNecessarios;
+
+        if (botaoColher != null) botaoColher.onClick.AddListener(Colher);
+
+        if (botaoMudarDia != null)
+        {
+            botaoMudarDia.gameObject.SetActive(false);
+            botaoMudarDia.onClick.AddListener(MudarDia);
+        }
+
+        _audio = GetComponent<AudioSource>();
+        if (_audio == null) _audio = gameObject.AddComponent<AudioSource>();
+        _audio.playOnAwake = false;
     }
 
     void Update()
@@ -51,12 +60,6 @@ public class MissaoFazenda1 : MonoBehaviour
             Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, alvo, 10 * Time.deltaTime);
         }
         else Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 5, 3 * Time.deltaTime);
-
-        if (vignette != null)
-        {
-            float alvo = (float)cliques / cliquesNecessarios * vignetteMax;
-            vignette.color = new Color(0, 0, 0, Mathf.Lerp(vignette.color.a, alvo, 5 * Time.deltaTime));
-        }
     }
 
     void Colher()
@@ -64,19 +67,32 @@ public class MissaoFazenda1 : MonoBehaviour
         if (colheu) return;
 
         cliques++;
-        textoContagem.text = cliques + " / " + cliquesNecessarios;
-
+        if (textoContagem != null) textoContagem.text = cliques + " / " + cliquesNecessarios;
         shake = 0.1f + cliques * 0.02f;
         zoom = 1f;
 
         if (cliques >= cliquesNecessarios)
         {
             colheu = true;
-            fundoNormal.SetActive(false);
-            fundoColhido.SetActive(true);
-            botaoColher.gameObject.SetActive(false);
-            painelMensagem.SetActive(true);
-            textoMensagem.text = "Plantação colhida!";
+
+            if (fundoNormal != null) fundoNormal.SetActive(false);
+            if (fundoColhido != null) fundoColhido.SetActive(true);
+
+            if (botaoColher != null) botaoColher.gameObject.SetActive(false);
+
+            if (painelMensagem != null && textoMensagem != null)
+            {
+                painelMensagem.SetActive(true);
+                textoMensagem.text = "Missão concluída.";
+            }
+
+            if (botaoMudarDia != null)
+                botaoMudarDia.gameObject.SetActive(true);
         }
+    }
+
+    void MudarDia()
+    {
+        SceneManager.LoadScene("Dia2");
     }
 }
