@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Manoel/Scenes/Bootstrap.unity
     guid: 648626e799dc73d4cb7308b58223ae65
+  - enabled: 1
+    path: Assets/Thiago/fuga1.unity
+    guid: ee829901b98e6f4439c892eff03c7354
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
