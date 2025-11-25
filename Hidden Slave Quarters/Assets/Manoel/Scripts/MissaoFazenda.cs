@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MissaoFazenda : MonoBehaviour
 {
+    public GameObject painelMensagem;
+    public TextMeshProUGUI textoMensagem;
     public Button botaoFerramenta;
     public Button botaoBalde;
     public Button botaoPoco;
@@ -24,6 +27,8 @@ public class MissaoFazenda : MonoBehaviour
     bool regou1 = false;
     bool regou2 = false;
     bool regou3 = false;
+    public string textoExplicativo;
+    public float tempoAutoFechar = 4f;
 
     void Start()
     {
@@ -40,8 +45,14 @@ public class MissaoFazenda : MonoBehaviour
         AtualizarPoço();
         AtualizarBalde();
         AtualizarInteracoes();
+
+        SistemaMensagens.instancia?.MostrarMensagem(textoExplicativo, tempoAutoFechar);
     }
 
+    void FecharMensagemInicial()
+    {
+        painelMensagem.SetActive(false);
+    }
     void PegarFerramenta()
     {
         if (pegouFerramenta) return;
