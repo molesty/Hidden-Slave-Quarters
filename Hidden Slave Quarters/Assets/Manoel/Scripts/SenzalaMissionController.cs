@@ -103,7 +103,6 @@ public class SenzalaMissionController : MonoBehaviour
         Debug.Log("Pegou o ferro (Senzala).");
         Mostrar("Você encontrou um ferro enferrujado.");
         if (botaoFerro != null) botaoFerro.interactable = false;
-        if (GameManager.instancia != null) GameManager.instancia.ColetouFerro();
     }
 
     void OnClickPuxarChave()
@@ -124,7 +123,6 @@ public class SenzalaMissionController : MonoBehaviour
         Debug.Log("Puxou a chave (Senzala).");
         Mostrar("Você puxou uma chave com o ferro.");
         if (botaoPuxarChave != null) botaoPuxarChave.interactable = false;
-        if (GameManager.instancia != null) GameManager.instancia.ColetouChave();
     }
 
     void OnClickPorta()
@@ -153,7 +151,7 @@ public class SenzalaMissionController : MonoBehaviour
         if (waitSec > 0f) yield return new WaitForSeconds(waitSec);
         else yield return null;
         Mostrar("Você segue para a fazenda...");
-        if (GameManager.instancia != null) GameManager.instancia.AbrirPorta(cenaDestino);
+        if (GameManager.instancia != null) GameManager.instancia.MudarCena(cenaDestino);
         else SceneManager.LoadScene(cenaDestino);
     }
 

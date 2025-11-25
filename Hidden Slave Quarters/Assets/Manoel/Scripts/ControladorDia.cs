@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ControladorDia : MonoBehaviour
@@ -9,7 +9,7 @@ public class ControladorDia : MonoBehaviour
     {
         if (GameManager.instancia == null)
         {
-            Debug.LogWarning("GameManager n�o encontrado no ControladorDia");
+            Debug.LogWarning("GameManager não encontrado no ControladorDia");
             return;
         }
 
@@ -28,13 +28,13 @@ public class ControladorDia : MonoBehaviour
     {
         if (GameManager.instancia == null) return;
 
-        GameManager.instancia.MudarDia(novoDia);
+        GameManager.instancia.DefinirDia(novoDia);
         AtualizarTextoDia();
     }
 
     void AtualizarTextoDia()
     {
-        if (textoDia != null)
+        if (textoDia != null && GameManager.instancia != null)
         {
             textoDia.text = "Dia " + GameManager.instancia.diaAtual;
         }
