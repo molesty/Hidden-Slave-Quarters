@@ -373,7 +373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2908572768565141055, guid: 73a37faed5174c14496c1836d7c1a702,
+  m_Sprite: {fileID: -1424136580587880603, guid: f76f4297beacc724f9227451ec937594,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -533,7 +533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -645,7 +645,7 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -749,6 +749,8 @@ MonoBehaviour:
   textoContagem: {fileID: 686242213}
   painelMensagem: {fileID: 421741437}
   textoMensagem: {fileID: 686242213}
+  vignette: {fileID: 0}
+  vignetteMax: 0.55
   cliquesNecessarios: 3
 --- !u!4 &1104461120
 Transform:
