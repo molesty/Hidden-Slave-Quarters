@@ -1,15 +1,17 @@
 using UnityEngine;
+using TMPro;
 
 public class chave : MonoBehaviour
 {
-    public portâo gate; // referência ao portão
+    public portao gate;        // referência ao portão
+    public TMP_Text textoUI;   // referência ao texto na tela
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnMouseDown()
     {
-        if (other.CompareTag("Player"))
-        {
-            gate.OpenGate();
-            Destroy(gameObject); // remove a chave
-        }
+        gate.OpenGate();
+
+        textoUI.text = "Você encontrou a chave e fugiu!";
+
+        gameObject.SetActive(false);
     }
 }

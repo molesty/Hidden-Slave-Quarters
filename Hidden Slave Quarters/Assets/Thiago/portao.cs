@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class portâo : MonoBehaviour
+public class portao : MonoBehaviour
 {
     public Sprite gateClosed;
     public Sprite gateOpen;
