@@ -8,4 +8,12 @@ public class Missao : MonoBehaviour
     {
         Debug.Log("Objetivo da missão concluído!");
     }
+    [TextArea]
+    public string descricao; 
+
+    public void MostrarMissao()
+    {
+        SistemaMensagens.instancia.MostrarMensagem(descricao, 5f);
+    }
 }
+

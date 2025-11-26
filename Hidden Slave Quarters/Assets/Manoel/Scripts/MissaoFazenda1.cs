@@ -93,6 +93,6 @@ public class MissaoFazenda1 : MonoBehaviour
 
     void MudarDia()
     {
-        SceneManager.LoadScene("Dia2");
+        SceneManager.LoadScene("Senzala3");
     }
 }

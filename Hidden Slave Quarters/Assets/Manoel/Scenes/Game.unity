@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 271387072}
   - component: {fileID: 271387071}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: ScriptHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -991,7 +991,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
+  - {fileID: 271387072}
   - {fileID: 662476216}
   - {fileID: 338215985}
   - {fileID: 1615536356}
-  - {fileID: 271387072}
