@@ -85,9 +85,6 @@ public class GameManager : MonoBehaviour
             case "Fuga1":
                 missaoScript.descricao = "Encontre a saída e fuja sem ser visto.";
                 break;
-            default:
-                missaoScript.descricao = "Explore a área.";
-                break;
         }
 
         if (SistemaMensagens.instancia != null)

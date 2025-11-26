@@ -23,6 +23,7 @@ public class MissaoFazenda1 : MonoBehaviour
 
     void Start()
     {
+
         if (fundoNormal != null) fundoNormal.SetActive(true);
         if (fundoColhido != null) fundoColhido.SetActive(false);
         if (painelMensagem != null) painelMensagem.SetActive(false);

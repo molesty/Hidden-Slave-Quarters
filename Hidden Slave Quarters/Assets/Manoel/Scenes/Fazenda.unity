@@ -428,6 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   estadoAtual: 1
   diaAtual: 1
+  manterEntreCenas: 1
   missaoScript: {fileID: 0}
 --- !u!114 &365394673
 MonoBehaviour:
@@ -716,8 +717,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -200.88, y: 178.01}
-  m_SizeDelta: {x: -440.28, y: -389.68}
+  m_AnchoredPosition: {x: -226.73999, y: 171.29}
+  m_SizeDelta: {x: -491.98, y: -376.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661567325
 MonoBehaviour:
@@ -2146,8 +2147,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000095367, y: 0.00000047684}
-  m_SizeDelta: {x: 348, y: 31.31}
+  m_AnchoredPosition: {x: 1.035, y: -0.0000042915}
+  m_SizeDelta: {x: 305.95, y: 73.858}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1930781544
 MonoBehaviour:
