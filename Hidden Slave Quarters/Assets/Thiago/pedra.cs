@@ -13,20 +13,16 @@ public class pedra : MonoBehaviour
     {
         if (used) return;
 
-        // ativa a chave exatamente onde ela já está
+
         keyHidden.SetActive(true);
 
-        // pega o sprite da chave e coloca NA FRENTE da pedra
         var sr = keyHidden.GetComponent<SpriteRenderer>();
-        sr.sortingOrder = 999;  // bem na frente
+        sr.sortingOrder = 999;  
 
-        // remove a pedra
         gameObject.SetActive(false);
 
-        // abre o portão
         gate.OpenGate();
 
-        // mostra o texto
         textoUI.text = "Você encontrou a chave e fugiu!";
 
         used = true;

@@ -3,13 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CubeTopDownRigidbody2D : MonoBehaviour
 {
-    public float speed = 5f; // unidades por segundo
+    public float speed = 5f;
     Rigidbody2D rb;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.freezeRotation = true; // evita girar
+        rb.freezeRotation = true; 
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
 
@@ -21,7 +21,6 @@ public class CubeTopDownRigidbody2D : MonoBehaviour
         Vector2 move = new Vector2(h, v);
         if (move.sqrMagnitude > 1f) move = move.normalized;
 
-        // Movimento com velocidade fixa
         rb.linearVelocity = move * speed;
     }
 }

@@ -30,7 +30,7 @@ public class SenzalaEvento : MonoBehaviour
         textoDialogo.text = "Ei... eu vou te tirar daqui, espere mais um pouco.";
         yield return new WaitForSeconds(duracaoCena - duracaoFade);
         yield return StartCoroutine(FadeOut());
-        SceneManager.LoadScene("Senzala");
+        SceneManager.LoadScene("Senzala2");
     }
 
     IEnumerator FadeOut()

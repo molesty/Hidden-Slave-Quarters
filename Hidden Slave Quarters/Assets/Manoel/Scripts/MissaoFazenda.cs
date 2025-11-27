@@ -188,7 +188,7 @@ public class MissaoFazenda : MonoBehaviour
 
         if (GameManager.instancia != null)
         {
-            GameManager.instancia.MudarCena("Senzala2");
+            GameManager.instancia.MudarCena("SenzalaEvento");
             return;
         }
     }

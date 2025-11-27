@@ -27,13 +27,19 @@ EditorBuildSettings:
     path: Assets/Manoel/Scenes/Senzala3.unity
     guid: 19168b31ca265d94abb73dcd41ac3b0f
   - enabled: 1
-    path: Assets/Thiago/fuga1.unity
+    path: Assets/Manoel/Scenes/fuga1.unity
     guid: ee829901b98e6f4439c892eff03c7354
-  - enabled: 0
-    path: Assets/Manoel/Scenes/Bootstrap.unity
-    guid: 648626e799dc73d4cb7308b58223ae65
+  - enabled: 1
+    path: Assets/Manoel/Scenes/Victory.unity
+    guid: 9d652c78e79496b4b911a3d4e40ee343
   - enabled: 1
     path: Assets/Manoel/Scenes/Creditos.unity
     guid: 8b320ec7122d8c944a81f9ca544fad5e
+  - enabled: 0
+    path: Assets/Manoel/Scenes/Bootstrap.unity
+    guid: 648626e799dc73d4cb7308b58223ae65
+  - enabled: 0
+    path: Assets/Manoel/Scenes/fim.unity
+    guid: 45db7358fcc268749bb50d5080bc1bc0
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

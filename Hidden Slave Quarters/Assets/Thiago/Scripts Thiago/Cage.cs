@@ -3,27 +3,24 @@ using UnityEngine;
 public class Cage : MonoBehaviour
 {
     [Header("Objetos da Jaula")]
-    [SerializeField] private GameObject bars;    // grades visíveis
-    [SerializeField] private GameObject captive; // pessoa dentro da jaula
+    [SerializeField] private GameObject bars;    
+    [SerializeField] private GameObject captive; 
 
     [Header("Efeitos (Opcional)")]
-    [SerializeField] private AudioSource sfx;       // som de libertação
-    [SerializeField] private ParticleSystem fx;     // partículas ao libertar
+    [SerializeField] private AudioSource sfx;      
+    [SerializeField] private ParticleSystem fx;    
 
-    public bool IsRescued { get; private set; }    // flag de jaula já aberta
+    public bool IsRescued { get; private set; }    
 
     public void Rescue()
     {
         if (IsRescued) return;
         IsRescued = true;
 
-        // Desativa as grades
         if (bars) bars.SetActive(false);
 
-        // Faz a pessoa desaparecer
         if (captive) captive.SetActive(false);
 
-        // Toca partículas e som
         if (fx) fx.Play();
         if (sfx) sfx.Play();
     }

@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         switch (nomeCena)
         {
             case "Senzala":
-                missaoScript.descricao = "adicionar fala";
+                missaoScript.descricao = "Ontem jogaram essa chave aqui para mim… Disseram que era para eu trabalhar, e ainda ouvi risadas comentando que o poço estava quebrado....";
                 break;
             case "Fazenda":
                 missaoScript.descricao = "Regue a plantação e arrume o poço.";

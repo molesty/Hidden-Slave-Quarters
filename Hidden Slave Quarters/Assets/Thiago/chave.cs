@@ -3,8 +3,8 @@ using TMPro;
 
 public class chave : MonoBehaviour
 {
-    public portao gate;        // referência ao portão
-    public TMP_Text textoUI;   // referência ao texto na tela
+    public portao gate;        
+    public TMP_Text textoUI;   
 
     private void OnMouseDown()
     {

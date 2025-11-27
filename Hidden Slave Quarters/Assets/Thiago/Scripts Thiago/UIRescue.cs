@@ -34,7 +34,7 @@ public class UIRescue : MonoBehaviour
 
     public void Hide(Cage cage = null)
     {
-        if (cage != null && current != cage) return; // só esconde se for a mesma jaula
+        if (cage != null && current != cage) return; 
         if (rescueButton != null)
             rescueButton.gameObject.SetActive(false);
         current = null;

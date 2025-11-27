@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class CliqueParaCena : MonoBehaviour
 {
-    public string nomeDaCena; // cena para carregar
+    public string nomeDaCena; 
 
     private void OnMouseDown()
     {
@@ -12,7 +12,7 @@ public class CliqueParaCena : MonoBehaviour
 
     private System.Collections.IEnumerator TrocarDepois()
     {
-        yield return new WaitForSeconds(2f); // aguarda 3 segundos
+        yield return new WaitForSeconds(2f); 
         SceneManager.LoadScene(nomeDaCena);
     }
 }

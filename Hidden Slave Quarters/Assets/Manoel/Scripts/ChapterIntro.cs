@@ -15,6 +15,11 @@ public class ChapterIntro : MonoBehaviour
     public float hold = 1.6f;
     public float fadeOut = 0.4f;
 
+    public bool autoShowOnLoad = true;
+    public bool skipFirstSceneLoad = true;
+
+    bool _firstLoadSeen = false;
+
     void Awake()
     {
         if (instancia == null)
@@ -27,23 +32,56 @@ public class ChapterIntro : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (!autoShowOnLoad) return;
+        if (skipFirstSceneLoad && !_firstLoadSeen)
+        {
+            _firstLoadSeen = true;
+            return;
+        }
+
+        string title = HumanizeSceneName(scene.name);
+        Sprite bg = backgroundImage != null ? backgroundImage.sprite : null;
+
+        ShowChapterAndLoad(title, bg, hold, null);
+    }
+
+    string HumanizeSceneName(string name)
+    {
+        if (name.ToLower().Contains("senzala")) return "A Senzala";
+        if (name.ToLower().Contains("fazenda1")) return "Fazenda - Colheita";
+        if (name.ToLower().Contains("fazenda")) return "A Fazenda";
+        return name;
+    }
+
     public void ShowChapterAndLoad(string titulo, Sprite bgSprite, float totalHoldSeconds, string sceneToLoad)
     {
         StopAllCoroutines();
-        StartCoroutine(ShowAndLoadCoroutine(titulo, bgSprite, totalHoldSeconds, sceneToLoad));
+        StartCoroutine(ShowAndMaybeLoadCoroutine(titulo, bgSprite, totalHoldSeconds, sceneToLoad));
     }
 
-    IEnumerator ShowAndLoadCoroutine(string titulo, Sprite bgSprite, float totalHoldSeconds, string sceneToLoad)
+    IEnumerator ShowAndMaybeLoadCoroutine(string titulo, Sprite bgSprite, float totalHoldSeconds, string sceneToLoad)
     {
         if (tituloText != null) tituloText.text = titulo;
-        if (backgroundImage != null) backgroundImage.sprite = bgSprite;
+        if (backgroundImage != null && bgSprite != null) backgroundImage.sprite = bgSprite;
+
         if (painelCG == null)
         {
             if (!string.IsNullOrEmpty(sceneToLoad)) SceneManager.LoadScene(sceneToLoad);
             yield break;
         }
 
-        float halfHold = Mathf.Max(0, totalHoldSeconds);
         float t = 0f;
         while (t < fadeIn)
         {
@@ -53,7 +91,12 @@ public class ChapterIntro : MonoBehaviour
         }
         painelCG.alpha = 1f;
 
-        yield return new WaitForSecondsRealtime(halfHold);
+        float elapsed = 0f;
+        while (elapsed < totalHoldSeconds)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
 
         t = 0f;
         while (t < fadeOut)
